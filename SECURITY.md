@@ -27,6 +27,10 @@ GitHub Pages ไม่รองรับการตั้ง custom security he
 
 ถ้าต้องการระดับ hardening สูงกว่าเดิม ควรย้ายไป Cloudflare Pages, Netlify หรือ VPS/Nginx แล้วใช้ไฟล์ `_headers` หรือ `nginx-security.conf`
 
+## หมายเหตุระบบหลังบ้าน
+
+หน้า `admin.html` เป็น static admin preview เท่านั้น ยังไม่มี authentication, authorization, server-side validation หรือ audit log จริง ห้ามใช้เก็บข้อมูลลับหรือข้อมูลคดีจริงจนกว่าจะต่อ backend ที่มีระบบล็อกอินและสิทธิ์ผู้ใช้อย่างถูกต้อง
+
 ## เมื่อนำขึ้นเซิร์ฟเวอร์จริง
 
 - ใช้ HTTPS เท่านั้น

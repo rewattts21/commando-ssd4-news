@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /admin.html
 
 Sitemap: https://rewattts21.github.io/commando-ssd4-news/sitemap.xml

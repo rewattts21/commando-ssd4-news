@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ระบบหลังบ้าน | Commando SSD4</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#080d14">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; child-src 'none'; worker-src 'none'; form-action 'none'; img-src 'self' data:; font-src 'self'; media-src 'self'; manifest-src 'self'; style-src 'self'; style-src-elem 'self'; style-src-attr 'none'; script-src 'self'; script-src-elem 'self'; script-src-attr 'none'; connect-src 'none'; trusted-types default; require-trusted-types-for 'script'; upgrade-insecure-requests">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=(), interest-cohort=()">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <aside class="admin-sidebar" aria-label="เมนูระบบหลังบ้าน">
+    <a class="admin-brand" href="index.html">
+      <img src="assets/ssd4-live-logo.jpg" alt="Commando SSD4">
+      <span>
+        <strong>Commando SSD4</strong>
+        <small>Admin Console</small>
+      </span>
+    </a>
+    <nav>
+      <a class="active" href="#dashboard">ภาพรวม</a>
+      <a href="#compose">สร้างข่าว</a>
+      <a href="#queue">คิวเผยแพร่</a>
+      <a href="#security">ความปลอดภัย</a>
+    </nav>
+    <div class="sidebar-note">
+      <strong>Static Preview</strong>
+      <span>หน้านี้เป็น UI หลังบ้านสำหรับเตรียมต่อ backend จริง ยังไม่เก็บข้อมูลบนเซิร์ฟเวอร์</span>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <div>
+        <p class="eyebrow">ระบบหลังบ้าน</p>
+        <h1>ศูนย์จัดการข่าว Commando SSD4</h1>
+      </div>
+      <div class="topbar-actions">
+        <a class="ghost-button" href="index.html">ดูหน้าเว็บ</a>
+        <button class="primary-button" type="button" id="exportButton">ส่งออกข้อมูลร่าง</button>
+      </div>
+    </header>
+
+    <section id="dashboard" class="metric-grid" aria-label="ภาพรวมระบบ">
+      <article>
+        <span>ข่าวเผยแพร่</span>
+        <strong>3</strong>
+        <small>รายการตัวอย่างบนหน้าเว็บ</small>
+      </article>
+      <article>
+        <span>รอตรวจทาน</span>
+        <strong id="draftCount">0</strong>
+        <small>ร่างข่าวในเบราว์เซอร์นี้</small>
+      </article>
+      <article>
+        <span>ช่องทางติดต่อ</span>
+        <strong>4</strong>
+        <small>Facebook, IG, YouTube, TikTok</small>
+      </article>
+      <article>
+        <span>Security</span>
+        <strong>86%</strong>
+        <small>CSP เข้ม + noindex admin</small>
+      </article>
+    </section>
+
+    <section id="compose" class="admin-panel compose-layout">
+      <div>
+        <p class="eyebrow">สร้างข่าว</p>
+        <h2>ร่างข่าวจับกุมหรือประกาศ</h2>
+        <p class="panel-copy">กรอกข้อมูลเพื่อจัดรูปแบบข่าวเบื้องต้น ข้อมูลจะอยู่ในเบราว์เซอร์เครื่องนี้เท่านั้นจนกว่าจะต่อ backend จริง</p>
+        <form id="draftForm" class="draft-form" autocomplete="off" novalidate>
+          <label>
+            หมวดข่าว
+            <select name="category">
+              <option>ข่าวจับกุม</option>
+              <option>ปฏิบัติการร่วม</option>
+              <option>เตือนภัย</option>
+              <option>ประกาศ</option>
+            </select>
+          </label>
+          <label>
+            หัวข้อข่าว
+            <input name="title" maxlength="120" placeholder="เช่น จับกุมผู้ต้องหาตามหมายจับคดีสำคัญ">
+          </label>
+          <div class="field-row">
+            <label>
+              วันที่เผยแพร่
+              <input name="date" type="date">
+            </label>
+            <label>
+              พื้นที่
+              <input name="area" maxlength="80" placeholder="จังหวัด/พื้นที่ปฏิบัติ">
+            </label>
+          </div>
+          <label>
+            รายละเอียดสรุป
+            <textarea name="summary" rows="5" maxlength="900" placeholder="สรุปข้อเท็จจริงที่เผยแพร่ได้"></textarea>
+          </label>
+          <label class="check-row">
+            <input name="rights" type="checkbox">
+            <span>ตรวจสอบแล้วว่าไม่มีข้อมูลส่วนบุคคลเกินจำเป็นหรือข้อมูลที่ห้ามเผยแพร่</span>
+          </label>
+          <button class="primary-button" type="submit">บันทึกร่างในเครื่อง</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+      <aside class="preview-card" aria-label="ตัวอย่างข่าว">
+        <span class="news-tag" id="previewCategory">ข่าวจับกุม</span>
+        <time id="previewDate">ยังไม่ระบุวันที่</time>
+        <h3 id="previewTitle">หัวข้อข่าวจะแสดงตรงนี้</h3>
+        <p id="previewSummary">รายละเอียดสรุปข่าวจะแสดงตรงนี้เมื่อเริ่มกรอกข้อมูล</p>
+        <dl>
+          <div><dt>พื้นที่</dt><dd id="previewArea">ยังไม่ระบุ</dd></div>
+          <div><dt>สถานะ</dt><dd>รอตรวจทาน</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="queue" class="admin-panel">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">คิวเผยแพร่</p>
+          <h2>ร่างข่าวในเครื่องนี้</h2>
+        </div>
+        <button class="ghost-button" type="button" id="clearButton">ล้างร่างทั้งหมด</button>
+      </div>
+      <div class="draft-list" id="draftList">
+        <p class="empty-state">ยังไม่มีร่างข่าว</p>
+      </div>
+    </section>
+
+    <section id="security" class="admin-panel security-panel">
+      <p class="eyebrow">ความปลอดภัย</p>
+      <h2>สิ่งที่ต้องมีก่อนทำ backend จริง</h2>
+      <div class="security-grid">
+        <article>
+          <strong>Authentication</strong>
+          <span>ใช้บัญชีผู้ดูแลจริง เช่น GitHub OAuth, Google Workspace หรือระบบ SSO ของหน่วย</span>
+        </article>
+        <article>
+          <strong>Role-Based Access</strong>
+          <span>แยกสิทธิ์ผู้เขียนข่าว ผู้ตรวจทาน และผู้เผยแพร่</span>
+        </article>
+        <article>
+          <strong>Audit Log</strong>
+          <span>บันทึกว่าใครแก้ข่าวอะไร เมื่อไร และเผยแพร่เวอร์ชันไหน</span>
+        </article>
+        <article>
+          <strong>Content Review</strong>
+          <span>มี checklist ป้องกันข้อมูลส่วนบุคคลหรือข้อมูลคดีที่ไม่ควรเผยแพร่</span>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>
