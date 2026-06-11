@@ -21,3 +21,4 @@
 - `nginx-security.conf` security headers สำหรับ Nginx
 - `SECURITY.md` แนวทางความปลอดภัยก่อนนำเว็บขึ้นใช้งานจริง
 - `robots.txt` และ `sitemap.xml` สำหรับ search engine indexing
+- `.well-known/security.txt` ช่องทางรับแจ้งปัญหาความปลอดภัย
