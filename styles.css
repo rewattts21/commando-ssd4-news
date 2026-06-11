@@ -638,6 +638,42 @@ a {
   background: var(--surface-2);
 }
 
+.standards-section {
+  padding-top: 96px;
+}
+
+.standard-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.standard-grid article {
+  min-height: 168px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(240, 184, 63, 0.08), rgba(255, 255, 255, 0.03)),
+    var(--surface);
+}
+
+.standard-grid strong,
+.standard-grid span {
+  display: block;
+}
+
+.standard-grid strong {
+  color: #fff;
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+.standard-grid span {
+  margin-top: 10px;
+  color: var(--muted);
+}
+
 .contact-section {
   align-items: start;
 }
@@ -697,44 +733,72 @@ a {
   color: #9ef2ff;
 }
 
-.contact-form {
-  display: grid;
-  gap: 14px;
-  padding: 24px;
+.contact-card {
+  padding: 28px;
+  border: 1px solid rgba(240, 184, 63, 0.28);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(240, 184, 63, 0.14), rgba(215, 54, 54, 0.08)),
+    var(--surface);
+  box-shadow: var(--shadow);
 }
 
-label {
-  display: grid;
-  gap: 6px;
-  color: #dce6f2;
+.card-label {
+  display: inline-flex;
+  min-height: 28px;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 6px;
+  background: rgba(240, 184, 63, 0.16);
+  color: var(--gold-soft);
+  font-size: 13px;
   font-weight: 800;
 }
 
-input,
-textarea {
-  width: 100%;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.06);
-  padding: 12px 14px;
+.contact-card h3 {
+  margin: 16px 0 10px;
   color: #fff;
-  font: inherit;
+  font-size: clamp(26px, 4vw, 38px);
+  line-height: 1.15;
 }
 
-input::placeholder,
-textarea::placeholder {
-  color: #7f8da0;
-}
-
-textarea {
-  resize: vertical;
-}
-
-.form-note {
-  min-height: 24px;
+.contact-card p {
   margin: 0;
-  color: var(--gold-soft);
+  color: #d5dfeb;
+}
+
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.intel-list {
+  display: grid;
+  gap: 10px;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.intel-list li {
+  position: relative;
+  padding-left: 24px;
+  color: #dce6f2;
   font-weight: 700;
+}
+
+.intel-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--gold);
+  box-shadow: 0 0 14px rgba(240, 184, 63, 0.5);
 }
 
 .site-footer {
@@ -773,6 +837,7 @@ textarea {
   .news-dashboard,
   .quick-stats,
   .trust-strip,
+  .standard-grid,
   .mission-grid,
   .service-grid,
   .about-grid,
