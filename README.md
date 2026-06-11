@@ -16,6 +16,7 @@
 - `script.js` เมนูมือถือ
 - `assets/ssd4-live-hero.jpg` ภาพหลักของหน้าเว็บ
 - `assets/ssd4-live-logo.jpg` ภาพโลโก้ในหัวเว็บ
+- `assets/favicon.svg` ไอคอนเว็บและ browser tab
 - `_headers` security headers สำหรับโฮสต์ที่รองรับ เช่น Netlify หรือ Cloudflare Pages
 - `nginx-security.conf` security headers สำหรับ Nginx
 - `SECURITY.md` แนวทางความปลอดภัยก่อนนำเว็บขึ้นใช้งานจริง

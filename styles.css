@@ -202,6 +202,19 @@ a {
   font-size: clamp(18px, 2.3vw, 25px);
 }
 
+.last-updated {
+  display: inline-flex;
+  min-height: 32px;
+  margin: 18px 0 0;
+  padding: 5px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #c9d5e4;
+  font-size: 14px;
+  font-weight: 800;
+}
+
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
@@ -309,6 +322,39 @@ a {
 .ticker a {
   color: var(--gold-soft);
   font-weight: 800;
+}
+
+.trust-strip {
+  width: min(1120px, calc(100% - 36px));
+  margin: 18px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.trust-strip article {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.trust-strip span,
+.trust-strip strong {
+  display: block;
+}
+
+.trust-strip span {
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.trust-strip strong {
+  margin-top: 4px;
+  color: #dce6f2;
+  font-size: 15px;
+  line-height: 1.42;
 }
 
 .quick-stats {
@@ -489,6 +535,17 @@ a {
 .featured-news h3 {
   font-size: clamp(28px, 4vw, 44px);
   line-height: 1.18;
+}
+
+.editor-note,
+.contact-lead {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  background: rgba(240, 184, 63, 0.1);
+  color: #e9d9ad;
+  font-weight: 700;
 }
 
 .card p,
@@ -715,6 +772,7 @@ textarea {
 @media (max-width: 940px) {
   .news-dashboard,
   .quick-stats,
+  .trust-strip,
   .mission-grid,
   .service-grid,
   .about-grid,

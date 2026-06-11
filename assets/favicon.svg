@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Commando SSD4">
+  <rect width="64" height="64" rx="12" fill="#080d14"/>
+  <path d="M9 20h46l-5 28H14L9 20Z" fill="#111a26" stroke="#f0b83f" stroke-width="3"/>
+  <text x="32" y="39" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="800" fill="#f0b83f">SSD4</text>
+</svg>
