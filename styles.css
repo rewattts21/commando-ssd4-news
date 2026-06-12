@@ -2110,3 +2110,106 @@ body {
   color: #fff;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
 }
+
+.command-chain {
+  position: relative;
+  display: grid;
+  gap: 46px;
+  padding: 18px 0 8px;
+}
+
+.chain-level {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+}
+
+.chain-top::after,
+.chain-deputies::before,
+.chain-deputies::after,
+.chain-team-lead::before {
+  content: "";
+  position: absolute;
+  background: rgba(255, 255, 255, 0.22);
+  pointer-events: none;
+}
+
+.chain-top::after {
+  left: 50%;
+  bottom: -46px;
+  width: 2px;
+  height: 46px;
+}
+
+.chain-deputies {
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  align-items: stretch;
+  max-width: 860px;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.chain-deputies::before {
+  top: -1px;
+  left: 25%;
+  right: 25%;
+  height: 2px;
+}
+
+.chain-deputies::after {
+  left: 50%;
+  bottom: -46px;
+  width: 2px;
+  height: 46px;
+}
+
+.chain-deputies .chain-card::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -47px;
+  width: 2px;
+  height: 46px;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.chain-team-lead::before {
+  left: 50%;
+  top: -46px;
+  width: 2px;
+  height: 46px;
+}
+
+.chain-card {
+  position: relative;
+  width: min(100%, 520px);
+}
+
+.chain-card.main-commander {
+  width: min(100%, 720px);
+}
+
+.chain-card .rank-badge {
+  min-width: 72px;
+  padding-inline: 12px;
+  width: auto;
+}
+
+@media (max-width: 760px) {
+  .command-chain {
+    gap: 22px;
+  }
+
+  .chain-deputies {
+    grid-template-columns: 1fr;
+  }
+
+  .chain-top::after,
+  .chain-deputies::before,
+  .chain-deputies::after,
+  .chain-deputies .chain-card::before,
+  .chain-team-lead::before {
+    display: none;
+  }
+}
