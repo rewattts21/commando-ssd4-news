@@ -1890,12 +1890,12 @@ body {
 }
 
 .brand-mark {
-  width: 92px;
-  height: 52px;
-  padding: 4px;
-  border-radius: 14px;
+  width: 118px;
+  height: 50px;
+  padding: 3px 7px;
+  border-radius: 12px;
   object-fit: contain;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.045);
   transform: none;
 }
 
@@ -1916,8 +1916,8 @@ body {
   }
 
   .brand-mark {
-    width: 70px;
-    height: 42px;
+    width: 88px;
+    height: 40px;
   }
 
   .brand strong {
