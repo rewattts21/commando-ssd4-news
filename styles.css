@@ -1989,6 +1989,44 @@ body {
   line-height: 1.35;
 }
 
+.person-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  margin-bottom: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.08), transparent 55%),
+    rgba(255, 255, 255, 0.04);
+  object-fit: contain;
+  padding: 18px;
+  filter: grayscale(1);
+}
+
+.commander-card:not(.main-commander) {
+  text-align: center;
+}
+
+.commander-card:not(.main-commander) .person-photo {
+  max-width: 190px;
+  margin-inline: auto;
+}
+
+.commander-card:not(.main-commander) .rank-badge {
+  margin-inline: auto;
+}
+
+.team-grid article {
+  text-align: center;
+}
+
+.team-grid .person-photo {
+  max-width: 150px;
+  margin-inline: auto;
+  padding: 14px;
+}
+
 @media (max-width: 1040px) {
   .team-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
