@@ -1833,6 +1833,58 @@ body {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
 }
 
+.hero {
+  background:
+    radial-gradient(circle at 76% 44%, rgba(255, 255, 255, 0.06), transparent 28%),
+    #06070a;
+}
+
+.hero::after {
+  right: 6%;
+  bottom: 10%;
+  width: min(420px, 42vw);
+  height: min(420px, 42vw);
+  border-radius: 0;
+  border: 0;
+  background: url("assets/cover/ssd4-cover-square-mono.jpg") center / contain no-repeat;
+  opacity: 0.1;
+  filter: grayscale(1);
+  box-shadow: none;
+}
+
+.hero-image {
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.78;
+}
+
+.hero-overlay {
+  background:
+    linear-gradient(90deg, rgba(5, 6, 8, 0.98), rgba(8, 9, 12, 0.86) 44%, rgba(8, 9, 12, 0.62)),
+    linear-gradient(0deg, rgba(5, 6, 8, 0.98), rgba(5, 6, 8, 0.24) 54%, rgba(5, 6, 8, 0.62));
+}
+
+.news-visual img {
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.92;
+}
+
+@media (max-width: 760px) {
+  .hero-image {
+    object-fit: cover;
+    object-position: 58% center;
+  }
+
+  .hero::after {
+    width: 260px;
+    height: 260px;
+    right: -70px;
+    bottom: 24%;
+    opacity: 0.08;
+  }
+}
+
 .brand {
   min-width: min(430px, 48vw);
 }
