@@ -1198,6 +1198,140 @@ body {
   }
 }
 
+/* Mourning period monochrome theme */
+:root {
+  --bg: #08090b;
+  --bg-soft: #111317;
+  --surface: #171a20;
+  --surface-2: #20242b;
+  --ink: #f5f5f5;
+  --muted: #b8bcc4;
+  --gold: #d8d8d8;
+  --gold-soft: #ffffff;
+  --red: #8a8f99;
+  --blue: #c5cad1;
+  --line: rgba(255, 255, 255, 0.14);
+  --shadow: 0 22px 58px rgba(0, 0, 0, 0.32);
+}
+
+body {
+  background:
+    radial-gradient(circle at 18% -8%, rgba(255, 255, 255, 0.08), transparent 34%),
+    radial-gradient(circle at 90% 8%, rgba(255, 255, 255, 0.05), transparent 30%),
+    linear-gradient(180deg, #07080a 0%, #111317 48%, #07080a 100%);
+}
+
+.site-header,
+.hero-overlay,
+.ticker,
+.band,
+.commander-panel,
+.card,
+.service-card,
+.featured-news,
+.news-item,
+.standard-grid article,
+.contact-card,
+.contact-info,
+.hero-command-card,
+.commander-card {
+  filter: grayscale(1);
+}
+
+.hero-image,
+.brand-mark,
+.news-visual img,
+.main-commander img,
+.profile-avatar,
+.social-link svg {
+  filter: grayscale(1) contrast(1.05);
+}
+
+.hero-overlay {
+  background:
+    linear-gradient(90deg, rgba(5, 6, 8, 0.96), rgba(8, 9, 12, 0.82) 46%, rgba(8, 9, 12, 0.42)),
+    linear-gradient(0deg, rgba(5, 6, 8, 0.96), rgba(5, 6, 8, 0.2) 58%, rgba(5, 6, 8, 0.56));
+}
+
+.hero h1 span,
+.eyebrow,
+.hero-sector,
+.live-kicker,
+.card-label,
+.commander-card span,
+.text-link,
+.footer-actions a:hover,
+.main-nav a:hover {
+  color: #f2f2f2;
+}
+
+.primary-button {
+  border-color: rgba(255, 255, 255, 0.38);
+  background: linear-gradient(135deg, #ffffff, #d9d9d9 52%, #a8a8a8);
+  color: #101216;
+}
+
+.secondary-button,
+.last-updated,
+.live-kicker,
+.news-tag,
+.rank-badge,
+.card-label {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  color: #f5f5f5;
+}
+
+.live-kicker span,
+.ticker strong {
+  background: #e8e8e8;
+  color: #101216;
+}
+
+.hero-copy {
+  border-left-color: #d8d8d8;
+}
+
+.hero::before {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.08), transparent);
+}
+
+.hero::after {
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 0 0 42px rgba(255, 255, 255, 0.015),
+    0 0 80px rgba(255, 255, 255, 0.08);
+}
+
+.ticker {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08), rgba(23, 26, 32, 0.96) 34%, rgba(255, 255, 255, 0.06)),
+    var(--surface);
+}
+
+.main-nav a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+}
+
+.social-link.facebook,
+.social-link.instagram,
+.social-link.youtube,
+.social-link.tiktok {
+  color: #e8e8e8;
+}
+
+.hero-sector {
+  color: #e7e7e7;
+  text-shadow: none;
+}
+
+.primary-button,
+.secondary-button,
+.hero h1 span {
+  filter: grayscale(1);
+}
+
 /* Premium news-command visual refresh */
 body {
   background:
@@ -1609,4 +1743,92 @@ body::before {
   .hero-brief {
     display: none;
   }
+}
+
+/* Final override: respectful monochrome mourning mode */
+body {
+  background:
+    radial-gradient(circle at 18% -8%, rgba(255, 255, 255, 0.08), transparent 34%),
+    radial-gradient(circle at 90% 8%, rgba(255, 255, 255, 0.05), transparent 30%),
+    linear-gradient(180deg, #07080a 0%, #111317 48%, #07080a 100%);
+}
+
+.site-header,
+.hero-overlay,
+.ticker,
+.band,
+.commander-panel,
+.card,
+.service-card,
+.featured-news,
+.news-item,
+.standard-grid article,
+.contact-card,
+.contact-info,
+.hero-command-card,
+.commander-card,
+.hero-image,
+.brand-mark,
+.news-visual img,
+.main-commander img,
+.profile-avatar,
+.social-link svg {
+  filter: grayscale(1);
+}
+
+.hero h1 span,
+.eyebrow,
+.hero-sector,
+.live-kicker,
+.card-label,
+.commander-card span,
+.text-link {
+  color: #f2f2f2;
+  text-shadow: none;
+}
+
+.hero-overlay {
+  background:
+    linear-gradient(90deg, rgba(5, 6, 8, 0.96), rgba(8, 9, 12, 0.82) 46%, rgba(8, 9, 12, 0.42)),
+    linear-gradient(0deg, rgba(5, 6, 8, 0.96), rgba(5, 6, 8, 0.2) 58%, rgba(5, 6, 8, 0.56));
+}
+
+.primary-button {
+  border-color: rgba(255, 255, 255, 0.42);
+  background: linear-gradient(135deg, #ffffff, #d9d9d9 52%, #a8a8a8);
+  color: #101216;
+  filter: grayscale(1);
+}
+
+.secondary-button,
+.last-updated,
+.live-kicker,
+.news-tag,
+.rank-badge,
+.card-label {
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.08);
+  color: #f5f5f5;
+}
+
+.live-kicker span,
+.ticker strong {
+  background: #e8e8e8;
+  color: #101216;
+}
+
+.hero-copy {
+  border-left-color: #d8d8d8;
+}
+
+.ticker {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08), rgba(23, 26, 32, 0.96) 34%, rgba(255, 255, 255, 0.06)),
+    #171a20;
+}
+
+.main-nav a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
 }
