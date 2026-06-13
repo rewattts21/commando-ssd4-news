@@ -3,6 +3,8 @@ const mainNav = document.querySelector(".main-nav");
 const navLinks = document.querySelectorAll(".main-nav a");
 const contactForm = document.querySelector("#contactForm");
 const formNote = document.querySelector(".form-note");
+const copyLinkButton = document.querySelector(".copy-link-button");
+const copyStatus = document.querySelector(".copy-status");
 
 menuButton.addEventListener("click", () => {
   const isOpen = mainNav.classList.toggle("open");
@@ -22,6 +24,23 @@ if (contactForm) {
     contactForm.reset();
     if (formNote) {
       formNote.textContent = "ปิดการส่งข้อมูลบนหน้าเว็บตัวอย่างแล้ว กรุณาติดต่อผ่านโทรศัพท์หรืออีเมลของหน่วย";
+    }
+  });
+}
+
+if (copyLinkButton) {
+  copyLinkButton.addEventListener("click", async () => {
+    const link = copyLinkButton.dataset.copyLink || window.location.href;
+
+    try {
+      await navigator.clipboard.writeText(link);
+      if (copyStatus) {
+        copyStatus.textContent = "คัดลอกลิงก์แล้ว";
+      }
+    } catch {
+      if (copyStatus) {
+        copyStatus.textContent = link;
+      }
     }
   });
 }
