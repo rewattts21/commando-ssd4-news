@@ -2863,3 +2863,83 @@ body::before {
 .main-commander > div {
   width: 100%;
 }
+
+/* Commander page: cleaner hierarchy spacing */
+.command-chain {
+  gap: 72px;
+  padding: 28px 0 18px;
+}
+
+.chain-level {
+  gap: 26px;
+}
+
+.chain-deputies {
+  grid-template-columns: repeat(2, minmax(280px, 1fr));
+  gap: 36px;
+  max-width: 980px;
+}
+
+.chain-team-lead {
+  margin-top: 6px;
+}
+
+.chain-card {
+  width: min(100%, 460px);
+}
+
+.chain-card.main-commander {
+  width: min(100%, 440px);
+}
+
+.command-chain .commander-card {
+  padding: clamp(24px, 3vw, 34px);
+  border-radius: 30px;
+}
+
+.chain-top::after,
+.chain-deputies::before,
+.chain-deputies::after,
+.chain-team-lead::before,
+.chain-deputies .chain-card::before {
+  background: linear-gradient(180deg, rgba(13, 42, 71, 0.12), rgba(244, 191, 47, 0.42), rgba(13, 42, 71, 0.12));
+}
+
+.chain-deputies::before {
+  top: -19px;
+  left: 25%;
+  right: 25%;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(13, 42, 71, 0.08), rgba(244, 191, 47, 0.45), rgba(13, 42, 71, 0.08));
+}
+
+.chain-top::after {
+  bottom: -72px;
+  height: 72px;
+}
+
+.chain-deputies .chain-card::before {
+  top: -72px;
+  height: 54px;
+}
+
+.chain-deputies::after {
+  bottom: -72px;
+  height: 72px;
+}
+
+.chain-team-lead::before {
+  top: -72px;
+  height: 72px;
+}
+
+@media (max-width: 760px) {
+  .command-chain {
+    gap: 30px;
+    padding-top: 18px;
+  }
+
+  .chain-deputies {
+    gap: 22px;
+  }
+}
