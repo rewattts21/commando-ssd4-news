@@ -2943,3 +2943,26 @@ body::before {
     gap: 22px;
   }
 }
+
+/* Commander page: align deputy inner edges with the main commander card */
+@media (min-width: 1181px) {
+  .chain-deputies {
+    grid-template-columns: 460px 460px;
+    justify-content: center;
+    gap: 440px;
+    max-width: 1360px;
+  }
+
+  .chain-deputies::before {
+    left: calc(50% - 220px);
+    right: calc(50% - 220px);
+  }
+}
+
+@media (max-width: 1180px) and (min-width: 761px) {
+  .chain-deputies {
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+    gap: clamp(36px, 6vw, 72px);
+    max-width: 980px;
+  }
+}
