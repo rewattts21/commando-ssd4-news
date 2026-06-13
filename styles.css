@@ -2830,3 +2830,36 @@ body::before {
     white-space: normal;
   }
 }
+
+/* Commander page: make top commander card match the vertical personnel cards */
+.chain-card.main-commander {
+  width: min(100%, 420px);
+}
+
+.main-commander {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  align-items: start;
+  gap: 14px;
+  text-align: center;
+}
+
+.main-commander img {
+  display: block;
+  width: min(100%, 230px);
+  height: auto;
+  aspect-ratio: 4 / 5;
+  padding: 14px;
+  border-radius: 18px;
+  object-fit: contain;
+  background:
+    radial-gradient(circle at center, rgba(13, 42, 71, 0.04), transparent 58%),
+    #fff;
+  border: 1px solid rgba(13, 42, 71, 0.12);
+  box-shadow: none;
+}
+
+.main-commander > div {
+  width: 100%;
+}
