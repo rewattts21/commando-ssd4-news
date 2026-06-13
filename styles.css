@@ -2724,25 +2724,25 @@ body::before {
   }
 }
 
-/* Brand lockup: balanced logo + unit name */
+/* Brand lockup: fixed header identity across every page */
 .site-header {
-  min-height: 72px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  min-height: 76px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 .brand {
   flex: 0 0 auto;
   display: inline-grid;
-  grid-template-columns: 116px minmax(190px, 300px);
+  grid-template-columns: 146px minmax(190px, 320px);
   align-items: center;
-  gap: 14px;
+  gap: 6px;
   min-width: 0;
 }
 
 .brand-mark {
-  width: 116px;
-  height: 44px;
+  width: 146px;
+  height: 58px;
   padding: 0;
   border: 0;
   border-radius: 0;
@@ -2753,16 +2753,16 @@ body::before {
 
 .brand span {
   display: grid;
-  gap: 2px;
+  gap: 0;
   min-width: 0;
 }
 
 .brand strong {
   color: var(--blue);
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 900;
-  line-height: 1.15;
-  letter-spacing: 0;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
   white-space: nowrap;
 }
 
@@ -2770,9 +2770,9 @@ body::before {
   display: block;
   max-width: none;
   color: #5f7185;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
-  line-height: 1.35;
+  line-height: 1.25;
   white-space: nowrap;
 }
 
@@ -2782,45 +2782,46 @@ body::before {
 
 @media (max-width: 980px) {
   .brand {
-    grid-template-columns: 106px minmax(160px, 1fr);
+    grid-template-columns: 126px minmax(160px, 1fr);
+    gap: 5px;
   }
 
   .brand-mark {
-    width: 106px;
-    height: 40px;
+    width: 126px;
+    height: 50px;
   }
 
   .brand strong {
-    font-size: 16px;
+    font-size: 19px;
   }
 
   .brand small {
-    font-size: 11px;
+    font-size: 12px;
   }
 }
 
 @media (max-width: 560px) {
   .site-header {
-    min-height: 64px;
+    min-height: 68px;
   }
 
   .brand {
-    grid-template-columns: 92px 1fr;
-    gap: 10px;
+    grid-template-columns: 104px 1fr;
+    gap: 4px;
   }
 
   .brand-mark {
-    width: 92px;
-    height: 36px;
+    width: 104px;
+    height: 42px;
   }
 
   .brand strong {
-    font-size: 14px;
+    font-size: 15px;
   }
 
   .brand small {
     display: block;
-    font-size: 10px;
+    font-size: 10.5px;
     white-space: normal;
   }
 }
