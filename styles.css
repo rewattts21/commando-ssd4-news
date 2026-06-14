@@ -1708,6 +1708,33 @@ body::before {
   background: rgba(255, 255, 255, 0.06);
 }
 
+.contact-info .social-link {
+  border: 0;
+  color: #fff;
+  box-shadow: 0 16px 30px rgba(13, 42, 71, 0.16);
+}
+
+.contact-info .social-link.facebook {
+  background: linear-gradient(135deg, #1877f2, #0d47a1);
+}
+
+.contact-info .social-link.instagram {
+  background: linear-gradient(135deg, #f58529, #dd2a7b 48%, #8134af);
+}
+
+.contact-info .social-link.youtube {
+  background: linear-gradient(135deg, #ff2a2a, #b00000);
+}
+
+.contact-info .social-link.tiktok {
+  background: linear-gradient(135deg, #111827, #00f2ea 52%, #ff0050);
+}
+
+.contact-info .social-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 38px rgba(13, 42, 71, 0.24);
+}
+
 @media (max-width: 1080px) {
   .hero {
     padding-bottom: 360px;
