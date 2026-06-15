@@ -5,16 +5,17 @@
 ## วิธีใช้งาน
 
 1. เปิดไฟล์ `index.html` ในเบราว์เซอร์
-2. เพิ่มหรือแก้ข่าวหลักใน `assets/data/news-data.js`
-3. เปิด `admin.html` เพื่อร่างข่าวและส่งออกไฟล์ `news-data.js`
-4. นำไฟล์ที่ส่งออกไปแทนที่ `assets/data/news-data.js`
-5. commit และ push ขึ้น GitHub Pages
+2. เพิ่มข่าวจริงผ่านระบบหลังบ้าน local admin server
+3. ระบบจะสร้างไฟล์ข่าวใน `news/` และอัปเดต `assets/data/news-data.js`
+4. กดเผยแพร่จากหลังบ้าน หรือ commit/push ขึ้น GitHub Pages
 
 ## ไฟล์หลัก
 
 - `index.html` โครงหน้าเว็บและเนื้อหา
 - `news.html` หน้ารวมข่าวพร้อมค้นหาและกรองหมวด
 - `assets/data/news-data.js` ไฟล์ข้อมูลข่าวกลางที่หน้าเว็บอ่านร่วมกัน
+- `admin-server.js` local backend สำหรับล็อกอิน เพิ่มข่าว สร้างไฟล์ข่าว และ push ขึ้น GitHub Pages
+- `admin-console.html` หน้า console สำหรับลงข่าวจริงผ่าน `admin-server.js`
 - `admin.html` หน้าระบบหลังบ้านแบบ static สำหรับร่างข่าวและส่งออกข้อมูลกลาง
 - `styles.css` รูปแบบ สี และ responsive layout
 - `script.js` เมนูมือถือ ระบบค้นหา/กรองข่าว และ render ข่าวจากข้อมูลกลาง
@@ -28,7 +29,39 @@
 - `robots.txt` และ `sitemap.xml` สำหรับ search engine indexing
 - `.well-known/security.txt` ช่องทางรับแจ้งปัญหาความปลอดภัย
 
-## ระบบหลังบ้าน
+## ระบบหลังบ้านลงข่าวจริง
+
+GitHub Pages เป็น static hosting จึงเขียนข่าวจากหน้าเว็บสาธารณะโดยตรงไม่ได้ ระบบหลังบ้านจริงของโปรเจกต์นี้จึงเป็น local admin server สำหรับรันในเครื่องเจ้าหน้าที่เท่านั้น
+
+เริ่มใช้งาน:
+
+```powershell
+$env:SSD4_ADMIN_PASSWORD='ตั้งรหัสผ่านที่เดายาก'
+node admin-server.js
+```
+
+จากนั้นเปิด:
+
+```text
+http://127.0.0.1:8787/admin-console.html
+```
+
+ความสามารถ:
+
+1. ล็อกอินด้วยรหัสผ่านจาก `SSD4_ADMIN_PASSWORD`
+2. เพิ่มข่าวใหม่ผ่านฟอร์ม
+3. สร้างหน้าข่าวเฉพาะในโฟลเดอร์ `news/`
+4. อัปเดตข้อมูลกลาง `assets/data/news-data.js`
+5. อัปเดต `sitemap.xml`
+6. กด `Commit & Push` เพื่อเผยแพร่ขึ้น GitHub Pages
+
+ข้อควรระวัง:
+
+- server bind ที่ `127.0.0.1` เป็นค่าเริ่มต้น ไม่ควรเปิด public โดยตรง
+- ต้องตรวจสอบข้อมูลส่วนบุคคล รูปภาพ และถ้อยคำทางกฎหมายก่อนเผยแพร่
+- หากต้องการใช้งานผ่านอินเทอร์เน็ตจริง ควรวางหลัง HTTPS, reverse proxy, firewall และบัญชีผู้ใช้จริง
+
+## ระบบร่างข่าวแบบ static
 
 หน้า `admin.html` ใช้ร่างข่าวในเครื่องและส่งออกไฟล์ `news-data.js` สำหรับนำไปเผยแพร่จริงบน GitHub Pages ข้อมูลร่างถูกเก็บใน `localStorage` ของเบราว์เซอร์ผู้ใช้ ไม่ได้ถูกส่งขึ้นเซิร์ฟเวอร์
 

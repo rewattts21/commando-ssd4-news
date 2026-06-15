@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ระบบลงข่าวจริง | COMMANDO SSD4</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#08233f">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; child-src 'none'; worker-src 'none'; form-action 'self'; img-src 'self' data: https:; font-src 'self'; media-src 'self'; manifest-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'; trusted-types default; require-trusted-types-for 'script'">
+  <meta name="referrer" content="no-referrer">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="admin-console.css?v=backend-1">
+</head>
+<body>
+  <main class="console-shell">
+    <section class="login-card" id="loginCard">
+      <img src="assets/brand/commando-ssd4-header-logo-clean.png" alt="COMMANDO SSD4">
+      <h1>ระบบหลังบ้านลงข่าวจริง</h1>
+      <p>สำหรับเจ้าหน้าที่เท่านั้น ระบบนี้รันในเครื่องและเขียนไฟล์ข่าวเข้าระบบเว็บไซต์โดยตรง</p>
+      <form id="loginForm">
+        <label>
+          รหัสผ่านผู้ดูแล
+          <input name="password" type="password" autocomplete="current-password" required>
+        </label>
+        <button type="submit">เข้าสู่ระบบ</button>
+      </form>
+      <p class="status" id="loginStatus"></p>
+    </section>
+
+    <section class="dashboard hidden" id="dashboard">
+      <header class="console-header">
+        <div class="brand-lockup">
+          <img src="assets/brand/commando-ssd4-header-logo-clean.png" alt="COMMANDO SSD4">
+          <div>
+            <strong>กองกำกับการ 4</strong>
+            <span>กองบังคับการปฏิบัติการพิเศษ</span>
+          </div>
+        </div>
+        <div class="header-actions">
+          <a href="index.html" target="_blank" rel="noopener noreferrer">ดูหน้าเว็บ</a>
+          <button type="button" id="logoutButton">ออกจากระบบ</button>
+        </div>
+      </header>
+
+      <div class="console-grid">
+        <section class="panel">
+          <p class="eyebrow">เพิ่มข่าว</p>
+          <h2>สร้างข่าวใหม่และหน้าข่าวเฉพาะ</h2>
+          <form id="newsForm" class="news-form">
+            <div class="two-col">
+              <label>หมวดข่าว<input name="category" value="ข่าวจับกุม" required></label>
+              <label>วันที่ข่าว<input name="date" type="date" required></label>
+            </div>
+            <label>หัวข้อข่าว <small>แยกบรรทัดได้ เช่น COMMANDO SSD4 / หัวข้อหลัก / หัวข้อรอง</small><textarea name="title" rows="3" required></textarea></label>
+            <label>สรุปสั้นหน้าแรก<textarea name="excerpt" rows="3" required></textarea></label>
+            <div class="two-col">
+              <label>พื้นที่ปฏิบัติ<input name="area" placeholder="เช่น ย่านอ่อนนุช เขตสวนหลวง"></label>
+              <label>ผลการปฏิบัติ<input name="result" placeholder="เช่น ควบคุมตัวผู้ต้องหา 4 ราย"></label>
+            </div>
+            <div class="two-col">
+              <label>สถานะคดี<input name="caseStatus" value="อยู่ระหว่างดำเนินคดี"></label>
+              <label>คำค้น/แฮชแท็ก<input name="keywords" placeholder="จับกุม เตือนภัย COMMANDO SSD4"></label>
+            </div>
+            <label>รูปปก <small>ใส่ path ในเว็บ เช่น assets/news/folder/cover.jpg</small><input name="image" placeholder="assets/news/2026-06-05-case/cover.jpg"></label>
+            <label>วิดีโอ MP4 <small>ถ้ามี ใส่ path เช่น assets/news/folder/video.mp4</small><input name="videoHref"></label>
+            <div class="two-col">
+              <label>ชื่อแหล่งข่าว<input name="sourceText" value="COMMANDO SSD4 News Desk"></label>
+              <label>ลิงก์แหล่งข่าว<input name="sourceUrl" placeholder="https://www.facebook.com/..."></label>
+            </div>
+            <label>สรุปผลการปฏิบัติ<textarea name="summary" rows="6"></textarea></label>
+            <label>พฤติการณ์คดีเตือนภัย<textarea name="behavior" rows="6"></textarea></label>
+            <label>นาทีชาร์จจับกุม<textarea name="arrest" rows="6"></textarea></label>
+            <label>คอมมานโดเตือนภัยประชาชน<textarea name="publicWarning" rows="5"></textarea></label>
+            <label>หมายเหตุทางกฎหมาย<input name="legalNote" value="หมายเหตุ: บุคคลที่ถูกกล่าวหายังถือเป็นผู้บริสุทธิ์จนกว่าศาลจะมีคำพิพากษาถึงที่สุด"></label>
+            <div class="form-actions">
+              <button class="secondary" type="button" id="previewButton">ตรวจแบบร่าง</button>
+              <button type="submit">บันทึกข่าวจริง</button>
+            </div>
+          </form>
+          <pre class="status-box" id="saveStatus"></pre>
+        </section>
+
+        <aside class="panel side-panel">
+          <p class="eyebrow">เผยแพร่</p>
+          <h2>อัปเดตขึ้นเว็บไซต์</h2>
+          <p>หลังบันทึกข่าว ให้กดเผยแพร่ ระบบจะ commit และ push ไป GitHub Pages</p>
+          <button class="publish-button" type="button" id="publishButton">Commit & Push</button>
+          <pre class="status-box" id="publishStatus"></pre>
+          <hr>
+          <h3>ข่าวในระบบ</h3>
+          <div id="newsList" class="news-list"></div>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <script src="admin-console.js?v=backend-1" defer></script>
+</body>
+</html>
