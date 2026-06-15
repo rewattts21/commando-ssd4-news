@@ -5,16 +5,25 @@ const contactForm = document.querySelector("#contactForm");
 const formNote = document.querySelector(".form-note");
 const copyLinkButton = document.querySelector(".copy-link-button");
 const copyStatus = document.querySelector(".copy-status");
+const newsSearch = document.querySelector("#newsSearch");
+const newsFilters = document.querySelectorAll(".news-filter");
+const newsCards = document.querySelectorAll("[data-news-card]");
+const newsResultCount = document.querySelector("#newsResultCount");
+const newsEmptyState = document.querySelector("#newsEmptyState");
 
-menuButton.addEventListener("click", () => {
-  const isOpen = mainNav.classList.toggle("open");
-  menuButton.setAttribute("aria-expanded", String(isOpen));
-});
+if (menuButton && mainNav) {
+  menuButton.addEventListener("click", () => {
+    const isOpen = mainNav.classList.toggle("open");
+    menuButton.setAttribute("aria-expanded", String(isOpen));
+  });
+}
 
 navLinks.forEach((link) => {
   link.addEventListener("click", () => {
-    mainNav.classList.remove("open");
-    menuButton.setAttribute("aria-expanded", "false");
+    if (mainNav && menuButton) {
+      mainNav.classList.remove("open");
+      menuButton.setAttribute("aria-expanded", "false");
+    }
   });
 });
 
@@ -43,4 +52,49 @@ if (copyLinkButton) {
       }
     }
   });
+}
+
+if (newsCards.length && newsFilters.length) {
+  let activeFilter = "all";
+
+  const updateNewsList = () => {
+    const query = (newsSearch?.value || "").trim().toLowerCase();
+    let visibleCount = 0;
+
+    newsCards.forEach((card) => {
+      const category = (card.dataset.category || "").toLowerCase();
+      const keywords = (card.dataset.keywords || "").toLowerCase();
+      const text = card.textContent.toLowerCase();
+      const matchesFilter = activeFilter === "all" || category.includes(activeFilter.toLowerCase());
+      const matchesQuery = !query || text.includes(query) || keywords.includes(query);
+      const isVisible = matchesFilter && matchesQuery;
+
+      card.hidden = !isVisible;
+      if (isVisible) {
+        visibleCount += 1;
+      }
+    });
+
+    if (newsResultCount) {
+      newsResultCount.textContent = visibleCount === newsCards.length
+        ? "แสดงข่าวทั้งหมด"
+        : `พบข่าว ${visibleCount} รายการ`;
+    }
+
+    if (newsEmptyState) {
+      newsEmptyState.hidden = visibleCount > 0;
+    }
+  };
+
+  newsFilters.forEach((button) => {
+    button.addEventListener("click", () => {
+      activeFilter = button.dataset.filter || "all";
+      newsFilters.forEach((filterButton) => filterButton.classList.remove("active"));
+      button.classList.add("active");
+      updateNewsList();
+    });
+  });
+
+  newsSearch?.addEventListener("input", updateNewsList);
+  updateNewsList();
 }
