@@ -368,6 +368,18 @@ textarea {
   color: var(--muted);
 }
 
+.draft-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+.draft-actions .ghost-button {
+  min-height: 36px;
+  padding: 6px 12px;
+  color: #ffb7b7;
+}
+
 .security-grid {
   margin-top: 20px;
 }

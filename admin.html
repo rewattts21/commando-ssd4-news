@@ -10,7 +10,7 @@
   <meta name="referrer" content="no-referrer">
   <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=(), interest-cohort=()">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="admin.css?v=news-system">
 </head>
 <body>
   <aside class="admin-sidebar" aria-label="เมนูระบบหลังบ้าน">
@@ -29,7 +29,7 @@
     </nav>
     <div class="sidebar-note">
       <strong>Static Preview</strong>
-      <span>หน้านี้เป็น UI หลังบ้านสำหรับเตรียมต่อ backend จริง ยังไม่เก็บข้อมูลบนเซิร์ฟเวอร์</span>
+        <span>เพิ่มข่าวเป็นร่าง ตรวจทาน แล้วส่งออกเป็นไฟล์ข้อมูลกลางสำหรับเผยแพร่บน GitHub Pages</span>
     </div>
   </aside>
 
@@ -41,15 +41,15 @@
       </div>
       <div class="topbar-actions">
         <a class="ghost-button" href="index.html">ดูหน้าเว็บ</a>
-        <button class="primary-button" type="button" id="exportButton">ส่งออกข้อมูลร่าง</button>
+        <button class="primary-button" type="button" id="exportButton">ส่งออก news-data.js</button>
       </div>
     </header>
 
     <section id="dashboard" class="metric-grid" aria-label="ภาพรวมระบบ">
       <article>
         <span>ข่าวเผยแพร่</span>
-        <strong>3</strong>
-        <small>รายการตัวอย่างบนหน้าเว็บ</small>
+        <strong id="publishedCount">0</strong>
+        <small>อ่านจากไฟล์ข้อมูลกลาง</small>
       </article>
       <article>
         <span>รอตรวจทาน</span>
@@ -87,6 +87,10 @@
             หัวข้อข่าว
             <input name="title" maxlength="120" placeholder="เช่น จับกุมผู้ต้องหาตามหมายจับคดีสำคัญ">
           </label>
+          <label>
+            ลิงก์ข่าวเต็ม
+            <input name="href" maxlength="160" placeholder="news/2026-06-05-arrest-case.html">
+          </label>
           <div class="field-row">
             <label>
               วันที่เผยแพร่
@@ -100,6 +104,20 @@
           <label>
             รายละเอียดสรุป
             <textarea name="summary" rows="5" maxlength="900" placeholder="สรุปข้อเท็จจริงที่เผยแพร่ได้"></textarea>
+          </label>
+          <div class="field-row">
+            <label>
+              รูปปก
+              <input name="image" maxlength="180" placeholder="assets/news/.../cover.jpg">
+            </label>
+            <label>
+              ลิงก์วิดีโอ/จุดวิดีโอ
+              <input name="videoHref" maxlength="180" placeholder="news/...html#video">
+            </label>
+          </div>
+          <label>
+            คำค้น/แท็ก
+            <input name="keywords" maxlength="260" placeholder="จับกุม เตือนภัย วิดีโอ พื้นที่">
           </label>
           <label class="check-row">
             <input name="rights" type="checkbox">
@@ -129,6 +147,7 @@
         </div>
         <button class="ghost-button" type="button" id="clearButton">ล้างร่างทั้งหมด</button>
       </div>
+      <p class="panel-copy">เมื่อพร้อมเผยแพร่ ให้กด “ส่งออก news-data.js” แล้วนำไฟล์ที่ได้ไปแทนที่ `assets/data/news-data.js` จากนั้น commit/push ขึ้นเว็บ</p>
       <div class="draft-list" id="draftList">
         <p class="empty-state">ยังไม่มีร่างข่าว</p>
       </div>
@@ -158,6 +177,7 @@
     </section>
   </main>
 
-  <script src="admin.js"></script>
+  <script src="assets/data/news-data.js?v=news-system"></script>
+  <script src="admin.js?v=news-system-2"></script>
 </body>
 </html>
