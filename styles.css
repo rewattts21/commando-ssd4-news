@@ -1735,6 +1735,55 @@ body::before {
   box-shadow: 0 20px 38px rgba(13, 42, 71, 0.24);
 }
 
+.map-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 14px 0 18px;
+  padding: 16px;
+  border: 1px solid rgba(13, 42, 71, 0.12);
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at 92% 12%, rgba(244, 191, 47, 0.22), transparent 34%),
+    linear-gradient(135deg, #0d2a47, #123b63);
+  color: #fff;
+  box-shadow: 0 16px 34px rgba(13, 42, 71, 0.18);
+}
+
+.map-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px rgba(13, 42, 71, 0.25);
+}
+
+.map-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  border-radius: 14px;
+  background: var(--gold);
+  color: var(--blue);
+  font-size: 26px;
+  font-weight: 900;
+}
+
+.map-link strong,
+.map-link small {
+  display: block;
+}
+
+.map-link strong {
+  font-size: 18px;
+  line-height: 1.25;
+}
+
+.map-link small {
+  margin-top: 2px;
+  color: rgba(255, 255, 255, 0.76);
+  font-weight: 800;
+}
+
 /* News index page */
 .news-index-main {
   padding-top: 76px;
