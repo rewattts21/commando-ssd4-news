@@ -10,7 +10,7 @@ const HOST = process.env.SSD4_ADMIN_HOST || "127.0.0.1";
 const PORT = Number(process.env.SSD4_ADMIN_PORT || 8787);
 const PASSWORD = process.env.SSD4_ADMIN_PASSWORD || "changeme-ssd4";
 const SESSION_TTL_MS = 1000 * 60 * 60 * 8;
-const MAX_BODY_BYTES = 1024 * 1024 * 2;
+const MAX_BODY_BYTES = Number(process.env.SSD4_MAX_UPLOAD_MB || 250) * 1024 * 1024;
 const NEWS_DATA_FILE = path.join(ROOT, "assets", "data", "news-data.js");
 const SITEMAP_FILE = path.join(ROOT, "sitemap.xml");
 const sessions = new Map();
@@ -71,6 +71,75 @@ function readBody(request) {
     });
     request.on("error", reject);
   });
+}
+
+function readRawBody(request) {
+  return new Promise((resolve, reject) => {
+    let size = 0;
+    const chunks = [];
+    request.on("data", (chunk) => {
+      size += chunk.length;
+      if (size > MAX_BODY_BYTES) {
+        reject(new Error("request-too-large"));
+        request.destroy();
+        return;
+      }
+      chunks.push(chunk);
+    });
+    request.on("end", () => resolve(Buffer.concat(chunks)));
+    request.on("error", reject);
+  });
+}
+
+async function readRequestData(request) {
+  const contentType = request.headers["content-type"] || "";
+  if (contentType.startsWith("multipart/form-data")) {
+    return parseMultipart(await readRawBody(request), contentType);
+  }
+  return { fields: await readBody(request), files: {} };
+}
+
+function parseMultipart(buffer, contentType) {
+  const boundaryMatch = contentType.match(/boundary=(?:"([^"]+)"|([^;]+))/i);
+  if (!boundaryMatch) throw new Error("missing-multipart-boundary");
+  const boundary = Buffer.from(`--${boundaryMatch[1] || boundaryMatch[2]}`);
+  const fields = {};
+  const files = {};
+  let cursor = 0;
+  while (cursor < buffer.length) {
+    const boundaryStart = buffer.indexOf(boundary, cursor);
+    if (boundaryStart === -1) break;
+    const partStart = boundaryStart + boundary.length;
+    if (buffer.slice(partStart, partStart + 2).toString() === "--") break;
+    const headerStart = partStart + 2;
+    const headerEnd = buffer.indexOf(Buffer.from("\r\n\r\n"), headerStart);
+    if (headerEnd === -1) break;
+    const headerText = buffer.slice(headerStart, headerEnd).toString("utf8");
+    const contentStart = headerEnd + 4;
+    const nextBoundary = buffer.indexOf(boundary, contentStart);
+    if (nextBoundary === -1) break;
+    const contentEnd = Math.max(contentStart, nextBoundary - 2);
+    const content = buffer.slice(contentStart, contentEnd);
+    const disposition = headerText.match(/content-disposition:\s*form-data;([^\r\n]+)/i);
+    const name = disposition && disposition[1].match(/name="([^"]+)"/i);
+    const filename = disposition && disposition[1].match(/filename="([^"]*)"/i);
+    const type = headerText.match(/content-type:\s*([^\r\n]+)/i);
+    if (name) {
+      const fieldName = name[1];
+      if (filename && filename[1]) {
+        files[fieldName] = {
+          filename: path.basename(filename[1]).replace(/[^\w.\-ก-ฮะ-์]/gi, "_"),
+          contentType: type ? type[1].trim() : "application/octet-stream",
+          buffer: content
+        };
+      } else {
+        fields[fieldName] = content.toString("utf8");
+      }
+    }
+    cursor = nextBoundary;
+  }
+  if (fields.dryRun === "true") fields.dryRun = true;
+  return { fields, files };
 }
 
 function parseCookies(request) {
@@ -326,12 +395,47 @@ ${video}
 `;
 }
 
+function mediaExtension(file, fallback) {
+  const fromName = path.extname(file.filename || "").toLowerCase();
+  if (/^\.(jpg|jpeg|png|webp|gif|mp4|mov|m4v)$/i.test(fromName)) return fromName;
+  const byType = {
+    "image/jpeg": ".jpg",
+    "image/png": ".png",
+    "image/webp": ".webp",
+    "image/gif": ".gif",
+    "video/mp4": ".mp4",
+    "video/quicktime": ".mov",
+    "video/x-m4v": ".m4v"
+  };
+  return byType[file.contentType] || fallback;
+}
+
+function writeUploadedMedia(id, data, files) {
+  const mediaDir = path.join(ROOT, "assets", "news", id);
+  fs.mkdirSync(mediaDir, { recursive: true });
+  if (files.coverFile && files.coverFile.buffer.length) {
+    if (!files.coverFile.contentType.startsWith("image/")) throw new Error("ไฟล์รูปปกต้องเป็นรูปภาพเท่านั้น");
+    const ext = mediaExtension(files.coverFile, ".jpg");
+    const relative = `assets/news/${id}/cover${ext}`;
+    fs.writeFileSync(path.join(ROOT, relative), files.coverFile.buffer);
+    data.image = relative;
+  }
+  if (files.videoFile && files.videoFile.buffer.length) {
+    if (!files.videoFile.contentType.startsWith("video/")) throw new Error("ไฟล์วิดีโอต้องเป็นวิดีโอเท่านั้น");
+    const ext = mediaExtension(files.videoFile, ".mp4");
+    const relative = `assets/news/${id}/video${ext}`;
+    fs.writeFileSync(path.join(ROOT, relative), files.videoFile.buffer);
+    data.videoHref = relative;
+  }
+}
+
 function createNews(input, options = {}) {
   const data = validateNews(input);
   const id = `${data.date}-${slugify(data.titleLines[0] || data.title)}`;
   const href = `news/${id}.html`;
   const existingNews = loadNews();
   if (existingNews.some((item) => item.id === id)) throw new Error("มีข่าวรหัสนี้อยู่แล้ว กรุณาปรับหัวข้อหรือวันที่");
+  if (!options.dryRun) writeUploadedMedia(id, data, options.files || {});
   const record = {
     id,
     status: "published",
@@ -457,8 +561,8 @@ const server = http.createServer(async (request, response) => {
     }
     if (request.method === "POST" && url.pathname === "/api/news") {
       if (!requireAuth(request, response)) return;
-      const body = await readBody(request);
-      const result = createNews(body, { dryRun: Boolean(body.dryRun) });
+      const payload = await readRequestData(request);
+      const result = createNews(payload.fields, { dryRun: Boolean(payload.fields.dryRun), files: payload.files });
       sendJson(response, 201, { ok: true, ...result, articlePath: result.articlePath.replace(ROOT + path.sep, "") });
       return;
     }

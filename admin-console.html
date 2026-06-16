@@ -61,8 +61,10 @@
               <label>สถานะคดี<input name="caseStatus" value="อยู่ระหว่างดำเนินคดี"></label>
               <label>คำค้น/แฮชแท็ก<input name="keywords" placeholder="จับกุม เตือนภัย COMMANDO SSD4"></label>
             </div>
-            <label>รูปปก <small>ใส่ path ในเว็บ เช่น assets/news/folder/cover.jpg</small><input name="image" placeholder="assets/news/2026-06-05-case/cover.jpg"></label>
-            <label>วิดีโอ MP4 <small>ถ้ามี ใส่ path เช่น assets/news/folder/video.mp4</small><input name="videoHref"></label>
+            <label>อัปโหลดรูปปก <small>เลือกไฟล์จากเครื่อง ระบบจะเก็บเข้า assets/news อัตโนมัติ</small><input name="coverFile" type="file" accept="image/*"></label>
+            <label>หรือใส่ path รูปปกเดิมในเว็บ <small>เช่น assets/news/folder/cover.jpg</small><input name="image" placeholder="assets/news/2026-06-05-case/cover.jpg"></label>
+            <label>อัปโหลดวิดีโอ <small>รองรับ MP4/MOV ตามขนาดที่เครื่องรับไหว</small><input name="videoFile" type="file" accept="video/*"></label>
+            <label>หรือใส่ path วิดีโอเดิมในเว็บ <small>เช่น assets/news/folder/video.mp4</small><input name="videoHref"></label>
             <div class="two-col">
               <label>ชื่อแหล่งข่าว<input name="sourceText" value="COMMANDO SSD4 News Desk"></label>
               <label>ลิงก์แหล่งข่าว<input name="sourceUrl" placeholder="https://www.facebook.com/..."></label>

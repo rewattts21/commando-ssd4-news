@@ -15,8 +15,9 @@ function setText(node, text) {
 }
 
 async function api(path, options = {}) {
+  const headers = options.body instanceof FormData ? {} : { "Content-Type": "application/json" };
   const response = await fetch(path, {
-    headers: { "Content-Type": "application/json" },
+    headers,
     credentials: "same-origin",
     ...options
   });
@@ -27,6 +28,12 @@ async function api(path, options = {}) {
 
 function formDataToObject(form) {
   return Object.fromEntries(new FormData(form).entries());
+}
+
+function formDataForUpload(form, extra = {}) {
+  const data = new FormData(form);
+  Object.entries(extra).forEach(([key, value]) => data.set(key, value));
+  return data;
 }
 
 function showDashboard(isLoggedIn) {
@@ -96,7 +103,7 @@ previewButton.addEventListener("click", async () => {
   try {
     const data = await api("/api/news", {
       method: "POST",
-      body: JSON.stringify({ ...formDataToObject(newsForm), dryRun: true })
+      body: formDataForUpload(newsForm, { dryRun: "true" })
     });
     setText(saveStatus, `แบบร่างพร้อมใช้งาน\nรหัสข่าว: ${data.record.id}\nไฟล์ที่จะสร้าง: ${data.articlePath}`);
   } catch (error) {
@@ -110,7 +117,7 @@ newsForm.addEventListener("submit", async (event) => {
   try {
     const data = await api("/api/news", {
       method: "POST",
-      body: JSON.stringify(formDataToObject(newsForm))
+      body: formDataForUpload(newsForm)
     });
     setText(saveStatus, `บันทึกสำเร็จ\nสร้างไฟล์: ${data.articlePath}\nลิงก์ข่าว: ${data.record.href}`);
     newsForm.reset();

@@ -94,6 +94,22 @@ input, textarea {
   outline: none;
 }
 
+input[type="file"] {
+  padding: .75rem;
+  background: linear-gradient(180deg, #ffffff, #f8fbff);
+}
+
+input[type="file"]::file-selector-button {
+  margin-right: 12px;
+  border: 0;
+  border-radius: 999px;
+  padding: .65rem 1rem;
+  color: #fff;
+  background: var(--navy);
+  font-weight: 800;
+  cursor: pointer;
+}
+
 textarea { resize: vertical; }
 
 input:focus, textarea:focus {
